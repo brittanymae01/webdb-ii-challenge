@@ -12,7 +12,7 @@ server.get("/api/cars", (req, res) => {
       return res.json(cars);
     })
     .catch(error => {
-      res.status(500).json({
+      return res.status(500).json({
         errorMessage: "Failed to get cars"
       });
     });
@@ -25,7 +25,7 @@ server.post("/api/cars", (req, res) => {
       return res.status(201).json(req.body);
     })
     .catch(error => {
-      res.status(500).json({
+      return res.status(500).json({
         errorMessage: "Failed to post car"
       });
     });
