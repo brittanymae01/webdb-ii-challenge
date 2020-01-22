@@ -19,6 +19,26 @@ server.get("/api/cars", (req, res) => {
     });
 });
 
+server.get("/api/cars/:id", (req, res) => {
+  db("cars")
+    .where(req.params.id)
+    .then(car => {
+      if (car.length) {
+        return res.json(car);
+      } else {
+        return res.status(404).json({
+          error: "invalid car id"
+        });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      return res.status(500).json({
+        error: "failed to get car"
+      });
+    });
+});
+
 server.post("/api/cars", (req, res) => {
   db("cars")
     .insert(req.body)
